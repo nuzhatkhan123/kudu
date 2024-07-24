@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sandwich Ingredients Calculator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: black;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        .container {
+            position: relative;
+            top: 10px;
+            left: 10px;
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        .calculator {
+            background: #333;
+            padding: 10px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            width: 200px;
+            text-align: center;
+        }
+        input[type="number"] {
+            width: 100%;
+            padding: 5px;
+            margin: 10px 0;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            background: #444;
+            color: white;
+        }
+        button {
+            padding: 5px 10px;
+            background: #28a745;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background: #218838;
+        }
+        .result {
+            margin-top: 10px;
+            font-size: 1em;
+        }
+        .export-container {
+            margin-top: auto;
+            text-align: center;
+            padding: 10px;
+            background: #333;
+        }
+        .export-container button {
+            background: #007bff;
+        }
+        .export-container button:hover {
+            background: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="calculator">
+            <h1>Quatro Chicken</h1>
+            <input type="number" id="numQuatroSandwiches" placeholder="Number of Sandwiches">
+            <button onclick="calculateQuatroTotal()">Calculate Total</button>
+            <div class="result" id="quatroResult"></div>
+            <button onclick="exportQuatroToExcel()">Export to Excel</button>
+        </div>
+
+        <div class="calculator">
+            <h1>Kudu Chicken</h1>
+            <input type="number" id="numKuduSandwiches" placeholder="Number of Sandwiches">
+            <button onclick="calculateKuduTotal()">Calculate Total</button>
+            <div class="result" id="kuduResult"></div>
+            <button onclick="exportKuduToExcel()">Export to Excel</button>
+        </div>
+
+        <div class="calculator">
+            <h1>Kudu Beef</h1>
+            <input type="number" id="numKuduBeefSandwiches" placeholder="Number of Sandwiches">
+            <button onclick="calculateKuduBeefTotal()">Calculate Total</button>
+            <div class="result" id="kuduBeefResult"></div>
+            <button onclick="exportKuduBeefToExcel()">Export to Excel</button>
+        </div>
+
+        <div class="calculator">
+            <h1>Philly Chicken</h1>
+            <input type="number" id="numPhillyChickenSandwiches" placeholder="Number of Sandwiches">
+            <button onclick="calculatePhillyChickenTotal()">Calculate Total</button>
+            <div class="result" id="phillyChickenResult"></div>
+            <button onclick="exportPhillyChickenToExcel()">Export to Excel</button>
+        </div>
+    </div>
+
+    <div class="export-container">
+        <button onclick="exportAllToExcel()">Export All to Excel</button>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.16.9/xlsx.full.min.js"></script>
+
+    <script>
+        function calculateQuatroTotal() {
+            const numSandwiches = parseFloat(document.getElementById('numQuatroSandwiches').value) || 0;
+
+            const regularMayo = 28 * numSandwiches;
+            const lettuce = 35 * numSandwiches;
+            const thousandIslandSauce = 28 * numSandwiches;
+            const bigBun = numSandwiches;
+            const chickenPieces = numSandwiches;
+
+            const totalWeight = regularMayo + lettuce + thousandIslandSauce + (bigBun * 60) + (chickenPieces * 120);
+
+            const resultText = `
+                Regular Mayo: ${regularMayo} grams<br>
+                Lettuce: ${lettuce} grams<br>
+                Thousand Island Sauce: ${thousandIslandSauce} grams<br>
+                Big Buns: ${bigBun} buns<br>
+                Spicy Chicken Pieces: ${chickenPieces} pieces<br>
+                <strong>Total Weight: ${totalWeight} grams</strong>
+            `;
+
+            document.getElementById('quatroResult').innerHTML = resultText;
+        }
+
+        function calculateKuduTotal() {
+            const numSandwiches = parseFloat(document.getElementById('numKuduSandwiches').value) || 0;
+
+            const mayo = 28 * numSandwiches;
+            const lettuce = 35 * numSandwiches;
+            const tomato = 28 * numSandwiches;
+            const kuduChicken = 110 * numSandwiches; // Assuming half packet is 110 grams
+            const steakBread = numSandwiches;
+
+            const totalWeight = mayo + lettuce + tomato + kuduChicken + (steakBread * 80); // Assuming one steak bread is 80 grams
+
+            const resultText = `
+                Mayonnaise: ${mayo} grams<br>
+                Lettuce: ${lettuce} grams<br>
+                Tomato: ${tomato} grams<br>
+                Kudu Chicken (half packet 110gms): ${kuduChicken} grams<br>
+                Steak Bread: ${steakBread} pieces<br>
+                <strong>Total Weight: ${totalWeight} grams</strong>
+            `;
+
+            document.getElementById('kuduResult').innerHTML = resultText;
+        }
+
+        function calculateKuduBeefTotal() {
+            const numSandwiches = parseFloat(document.getElementById('numKuduBeefSandwiches').value) || 0;
+
+            const steakBread = numSandwiches;
+            const mayo = 28 * numSandwiches;
+            const lettuce = 35 * numSandwiches;
+            const tomato = 28 * numSandwiches; // Assuming half slices is 28 grams
+            const kuduBeef = 110 * numSandwiches; // Assuming half packet is 110 grams
+            const onion = 14 * numSandwiches;
+            const greenPepper = 7 * numSandwiches;
+            const soySauce = 7 * numSandwiches;
+
+            const totalWeight = steakBread * 80 + mayo + lettuce + tomato + kuduBeef + onion + greenPepper + soySauce; // Assuming one steak bread is 80 grams
+
+            const resultText = `
+                Steak Bread: ${steakBread} pieces<br>
+                Mayonnaise: ${mayo} grams<br>
+                Lettuce: ${lettuce} grams<br>
+                Tomato: ${tomato} grams<br>
+                Kudu Beef: ${kuduBeef} grams<br>
+                Onion: ${onion} grams<br>
+                Green Pepper: ${greenPepper} grams<br>
+                Soy Sauce: ${soySauce} grams<br>
+                <strong>Total Weight: ${totalWeight} grams</strong>
+            `;
+
+            document.getElementById('kuduBeefResult').innerHTML = resultText;
+        }
+
+        function calculatePhillyChickenTotal() {
+            const numSandwiches = parseFloat(document.getElementById('numPhillyChickenSandwiches').value) || 0;
+
+            const phillyChicken = 200 * numSandwiches; // Assuming one packet is 200 grams
+            const onion = 56 * numSandwiches;
+            const swissCheese = numSandwiches; // Assuming 1 piece per sandwich
+            const steakBread = numSandwiches;
+
+            const totalWeight = phillyChicken + onion + (swissCheese * 28) + (steakBread * 80); // Assuming one steak bread is 80 grams and 1 piece of swiss cheese is 28 grams
+
+            const resultText = `
+                Philly Chicken: ${phillyChicken} grams<br>
+                Onion: ${onion} grams<br>
+                Swiss Cheese: ${swissCheese} pieces<br>
+                Steak Bread: ${steakBread} pieces<br>
+                <strong>Total Weight: ${totalWeight} grams</strong>
+            `;
+
+            document.getElementById('phillyChickenResult').innerHTML = resultText;
+        }
+
+        function exportQuatroToExcel() {
+            const numSandwiches = parseFloat(document.getElementById('numQuatroSandwiches').value) || 0;
+
+            const regularMayo = 28 * numSandwiches;
+            const lettuce = 35 * numSandwiches;
+            const thousandIslandSauce = 28 * numSandwiches;
+            const bigBun = numSandwiches;
+            const chickenPieces = numSandwiches;
+
+            const totalWeight = regularMayo + lettuce + thousandIslandSauce + (bigBun * 60) + (chickenPieces * 120);
+
+            const data = [
+                ['Ingredient', 'Quantity'],
+                ['Regular Mayo (grams)', regularMayo],
+                ['Lettuce (grams)', lettuce],
+                ['Thousand Island Sauce (grams)', thousandIslandSauce],
+                ['Big Buns (buns)', bigBun],
+                ['Spicy Chicken Pieces (pieces)', chickenPieces],
+                ['Total Weight (grams)', totalWeight]
+            ];
+
+            const worksheet = XLSX.utils.aoa_to_sheet(data);
+            const workbook = XLSX.utils.book_new();
+            XLSX.utils.book_append_sheet(workbook, worksheet, "Quatro Chicken");
+
+            XLSX.writeFile(workbook, "Quatro_Chicken_Sandwich.xlsx");
+        }
+
+        function exportKuduToExcel() {
+            const numSandwiches = parseFloat(document.getElementById('numKuduSandwiches').value) || 0;
+
+            const mayo = 28 * numSandwiches;
+            const lettuce = 35 * numSandwiches;
+            const tomato = 28 * numSandwiches;
+            const kuduChicken = 110 * numSandwiches; // Assuming half packet is 110 grams
+            const steakBread = numSandwiches;
+
+            const totalWeight = mayo + lettuce + tomato + kuduChicken + (steakBread * 80); // Assuming one steak bread is 80 grams
+
+            const data = [
+                ['Ingredient', 'Quantity'],
+                ['Mayonnaise (grams)', mayo],
+                ['Lettuce (grams)', lettuce],
+                ['Tomato (grams)', tomato],
+                ['Kudu Chicken (grams)', kuduChicken],
+                ['Steak Bread (pieces)', steakBread],
+                ['Total Weight (grams)', totalWeight]
+            ];
+
+            const worksheet = XLSX.utils.aoa_to_sheet(data);
+            const workbook = XLSX.utils.book_new();
+            XLSX.utils.book_append_sheet(workbook, worksheet, "Kudu Chicken");
+
+            XLSX.writeFile(workbook, "Kudu_Chicken_Sandwich.xlsx");
+        }
+
+        function exportKuduBeefToExcel() {
+            const numSandwiches = parseFloat(document.getElementById('numKuduBeefSandwiches').value) || 0;
+
+            const steakBread = numSandwiches;
+            const mayo = 28 * numSandwiches;
+            const lettuce = 35 * numSandwiches;
+            const tomato = 28 * numSandwiches;
+            const kuduBeef = 110 * numSandwiches;
+            const onion = 14 * numSandwiches;
+            const greenPepper = 7 * numSandwiches;
+            const soySauce = 7 * numSandwiches;
+
+            const totalWeight = steakBread * 80 + mayo + lettuce + tomato + kuduBeef + onion + greenPepper + soySauce;
+
+            const data = [
+                ['Ingredient', 'Quantity'],
+                ['Steak Bread (pieces)', steakBread],
+                ['Mayonnaise (grams)', mayo],
+                ['Lettuce (grams)', lettuce],
+                ['Tomato (grams)', tomato],
+                ['Kudu Beef (grams)', kuduBeef],
+                ['Onion (grams)', onion],
+                ['Green Pepper (grams)', greenPepper],
+                ['Soy Sauce (grams)', soySauce],
+                ['Total Weight (grams)', totalWeight]
+            ];
+
+            const worksheet = XLSX.utils.aoa_to_sheet(data);
+            const workbook = XLSX.utils.book_new();
+            XLSX.utils.book_append_sheet(workbook, worksheet, "Kudu Beef");
+
+            XLSX.writeFile(workbook, "Kudu_Beef_Sandwich.xlsx");
+        }
+
+        function exportPhillyChickenToExcel() {
+            const numSandwiches = parseFloat(document.getElementById('numPhillyChickenSandwiches').value) || 0;
+
+            const phillyChicken = 200 * numSandwiches; // Assuming one packet is 200 grams
+            const onion = 56 * numSandwiches;
+            const swissCheese = numSandwiches; // Assuming 1 piece per sandwich
+            const steakBread = numSandwiches;
+
+            const totalWeight = phillyChicken + onion + (swissCheese * 28) + (steakBread * 80); // Assuming one steak bread is 80 grams and 1 piece of swiss cheese is 28 grams
+
+            const data = [
+                ['Ingredient', 'Quantity'],
+                ['Philly Chicken (grams)', phillyChicken],
+                ['Onion (grams)', onion],
+                ['Swiss Cheese (pieces)', swissCheese],
+                ['Steak Bread (pieces)', steakBread],
+                ['Total Weight (grams)', totalWeight]
+            ];
+
+            const worksheet = XLSX.utils.aoa_to_sheet(data);
+            const workbook = XLSX.utils.book_new();
+            XLSX.utils.book_append_sheet(workbook, worksheet, "Philly Chicken");
+
+            XLSX.writeFile(workbook, "Philly_Chicken_Sandwich.xlsx");
+        }
+
+        function exportAllToExcel() {
+            const numQuatroSandwiches = parseFloat(document.getElementById('numQuatroSandwiches').value) || 0;
+            const numKuduSandwiches = parseFloat(document.getElementById('numKuduSandwiches').value) || 0;
+            const numKuduBeefSandwiches = parseFloat(document.getElementById('numKuduBeefSandwiches').value) || 0;
+            const numPhillyChickenSandwiches = parseFloat(document.getElementById('numPhillyChickenSandwiches').value) || 0;
+
+            // Quatro Chicken
+            const regularMayo = 28 * numQuatroSandwiches;
+            const lettuce = 35 * numQuatroSandwiches;
+            const thousandIslandSauce = 28 * numQuatroSandwiches;
+            const bigBun = numQuatroSandwiches;
+            const chickenPieces = numQuatroSandwiches;
+            const totalWeightQuatro = regularMayo + lettuce + thousandIslandSauce + (bigBun * 60) + (chickenPieces * 120);
+
+            // Kudu Chicken
+            const mayo = 28 * numKuduSandwiches;
+            const tomato = 28 * numKuduSandwiches;
+            const kuduChicken = 110 * numKuduSandwiches;
+            const steakBread = numKuduSandwiches;
+            const totalWeightKudu = mayo + lettuce + tomato + kuduChicken + (steakBread * 80);
+
+            // Kudu Beef
+            const steakBreadBeef = numKuduBeefSandwiches;
+            const mayoBeef = 28 * numKuduBeefSandwiches;
+            const lettuceBeef = 35 * numKuduBeefSandwiches;
+            const tomatoBeef = 28 * numKuduBeefSandwiches;
+            const kuduBeef = 110 * numKuduBeefSandwiches;
+            const onion = 14 * numKuduBeefSandwiches;
+            const greenPepper = 7 * numKuduBeefSandwiches;
+            const soySauce = 7 * numKuduBeefSandwiches;
+            const totalWeightBeef = steakBreadBeef * 80 + mayoBeef + lettuceBeef + tomatoBeef + kuduBeef + onion + greenPepper + soySauce;
+
+            // Philly Chicken
+            const phillyChicken = 200 * numPhillyChickenSandwiches; // Assuming one packet is 200 grams
+            const onionPhilly = 56 * numPhillyChickenSandwiches;
+            const swissCheese = numPhillyChickenSandwiches;
+            const steakBreadPhilly = numPhillyChickenSandwiches;
+            const totalWeightPhilly = phillyChicken + onionPhilly + (swissCheese * 28) + (steakBreadPhilly * 80);
+
+            const data = [
+                ['Quatro Chicken', 'Ingredient', 'Quantity'],
+                ['Quatro Chicken', 'Regular Mayo (grams)', regularMayo],
+                ['Quatro Chicken', 'Lettuce (grams)', lettuce],
+                ['Quatro Chicken', 'Thousand Island Sauce (grams)', thousandIslandSauce],
+                ['Quatro Chicken', 'Big Buns (buns)', bigBun],
+                ['Quatro Chicken', 'Spicy Chicken Pieces (pieces)', chickenPieces],
+                ['Quatro Chicken', 'Total Weight (grams)', totalWeightQuatro],
+                [],
+                ['Kudu Chicken', 'Ingredient', 'Quantity'],
+                ['Kudu Chicken', 'Mayonnaise (grams)', mayo],
+                ['Kudu Chicken', 'Lettuce (grams)', lettuce],
+                ['Kudu Chicken', 'Tomato (grams)', tomato],
+                ['Kudu Chicken', 'Kudu Chicken (grams)', kuduChicken],
+                ['Kudu Chicken', 'Steak Bread (pieces)', steakBread],
+                ['Kudu Chicken', 'Total Weight (grams)', totalWeightKudu],
+                [],
+                ['Kudu Beef', 'Ingredient', 'Quantity'],
+                ['Kudu Beef', 'Steak Bread (pieces)', steakBreadBeef],
+                ['Kudu Beef', 'Mayonnaise (grams)', mayoBeef],
+                ['Kudu Beef', 'Lettuce (grams)', lettuceBeef],
+                ['Kudu Beef', 'Tomato (grams)', tomatoBeef],
+                ['Kudu Beef', 'Kudu Beef (grams)', kuduBeef],
+                ['Kudu Beef', 'Onion (grams)', onion],
+                ['Kudu Beef', 'Green Pepper (grams)', greenPepper],
+                ['Kudu Beef', 'Soy Sauce (grams)', soySauce],
+                ['Kudu Beef', 'Total Weight (grams)', totalWeightBeef],
+                [],
+                ['Philly Chicken', 'Ingredient', 'Quantity'],
+                ['Philly Chicken', 'Philly Chicken (grams)', phillyChicken],
+                ['Philly Chicken', 'Onion (grams)', onionPhilly],
+                ['Philly Chicken', 'Swiss Cheese (pieces)', swissCheese],
+                ['Philly Chicken', 'Steak Bread (pieces)', steakBreadPhilly],
+                ['Philly Chicken', 'Total Weight (grams)', totalWeightPhilly]
+            ];
+
+            const worksheet = XLSX.utils.aoa_to_sheet(data);
+            const workbook = XLSX.utils.book_new();
+            XLSX.utils.book_append_sheet(workbook, worksheet, "All Sandwiches");
+
+            XLSX.writeFile(workbook, "All_Sandwiches_Sandwiches.xlsx");
+        }
+    </script>
+</body>
+</html>

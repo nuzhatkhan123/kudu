@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Landing Page</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-image: url('https://i.pinimg.com/originals/6f/96/b8/6f96b89d676e7695eb664bb737a2ccb1.jpg'); /* Replace with the path to your image */
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 20px;
+            background-color: rgba(51, 51, 51, 0.8); /* Slightly transparent background */
+            color: white;
+        }
+
+        .logo {
+            font-size: 24px;
+        }
+
+        .burger-menu {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+        }
+
+        .burger-menu .line {
+            width: 25px;
+            height: 3px;
+            background-color: white;
+            margin: 4px 0;
+        }
+
+        .nav-links ul {
+            display: flex;
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .nav-links ul li {
+            position: relative;
+            margin-left: 20px;
+        }
+
+        .nav-links ul li a {
+            text-decoration: none;
+            color: white;
+        }
+
+        .nav-links ul li .dropdown {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background-color: rgba(51, 51, 51, 0.8); /* Slightly transparent background */
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            width: 200px;
+        }
+
+        .nav-links ul li.active .dropdown {
+            display: block;
+        }
+
+        .nav-links ul li .dropdown li {
+            margin: 0;
+        }
+
+        .nav-links ul li .dropdown li a {
+            display: block;
+            padding: 10px;
+            color: white;
+        }
+
+        .hero {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 90vh;
+            background-color: rgba(0, 0, 0, 0.5); /* Slightly transparent background for text visibility */
+            color: white;
+            text-align: center;
+            background-image: url('path/to/your/image.jpg'); /* Replace with the path to your image */
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+
+        .hero p {
+            color: blue; /* Set the color of the paragraph text */
+        }
+
+        @media (max-width: 768px) {
+            .burger-menu {
+                display: flex;
+            }
+
+            .nav-links ul {
+                flex-direction: column;
+                display: none;
+                width: 100%;
+            }
+
+            .nav-links ul li {
+                margin: 10px 0;
+                text-align: center;
+            }
+
+            .nav-links.active ul {
+                display: flex;
+            }
+
+            .nav-links ul li .dropdown {
+                position: static;
+                width: 100%;
+            }
+
+            .nav-links ul li .dropdown li a {
+                padding: 10px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">GHOST Portal</div>
+        <div class="burger-menu" onclick="toggleMenu()">
+            <div class="line"></div>
+            <div class="line"></div>
+            <div class="line"></div>
+        </div>
+        <nav class="nav-links">
+            <ul>
+                <li><a href="C:\Users\moinr\Desktop\operationskudu\inv.apk">Inventory Ordering(apk)</a></li>
+                <li><a href="C:\Users\moinr\Desktop\operationskudu\bpm.html">B.P.M</a></li>
+                <li>
+                    <a href="services.html" onclick="toggleDropdown(event)">Burgers</a>
+                    <ul class="dropdown">
+                        <li><a href="C:\Users\moinr\Desktop\operationskudu\quotro.html">Quotro Sandwich</a></li>
+                        <li><a href="C:\Users\moinr\Desktop\operationskudu\kuduchickenregular.html">Kudu Chicken Regular</a></li>
+                        <li><a href="C:\Users\moinr\Desktop\operationskudu\kuduchickenspicy.html">Kudu Chicken Spicy</a></li>
+                        <li><a href="C:\Users\moinr\Desktop\operationskudu\kudubeef.html">Kudu Beef Sandwich</a></li>
+                        <li><a href="C:\Users\moinr\Desktop\operationskudu\phillychicken.html">Philly Chicken</a></li>
+                        <li><a href="C:\Users\moinr\Desktop\operationskudu\phillybeef.html">Philly Beef</a></li>
+                        <li><a href="C:\Users\moinr\Desktop\operationskudu\chickenburger.html">Chicken Burger</a></li>
+                        <li><a href="C:\Users\moinr\Desktop\operationskudu\clubsandwich.html">Klub Sandwich</a></li>
+                        <li><a href="veggieburger.html">Veggie Burger</a></li>
+                        <li><a href="cheeseburger.html">Cheese Burger</a></li>
+                        <li><a href="chickenburger.html">Chicken Burger</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="wraps.html" onclick="toggleDropdown(event)">Wraps</a>
+                    <ul class="dropdown">
+                        <li><a href="C:\Users\moinr\Desktop\operationskudu\laffinobeef.html">Laffino Beef</a></li>
+                        <li><a href="C:\Users\moinr\Desktop\operationskudu\laffinochicken.html">Lafino Chicken</a></li>
+                        <li><a href="C:\Users\moinr\Desktop\operationskudu\veggiewrap.html">soon</a></li>
+                        <li><a href="C:\Users\moinr\Desktop\operationskudu\falafelwrap.html">soon</a></li>
+                        <li><a href="C:\Users\moinr\Desktop\operationskudu\fishwrap.html">soon</a></li>
+                        <li><a href="C:\Users\moinr\Desktop\operationskudu\turkeywrap.html">soon</a></li>
+                        <li><a href="C:\Users\moinr\Desktop\operationskudu\hamwrap.html">soon</a></li>
+                    </ul>
+                </li>
+ <li>
+                    <a href="wraps.html" onclick="toggleDropdown(event)">Break Fast</a>
+                    <ul class="dropdown">
+                        <li><a href="C:\Users\moinr\Desktop\operationskudu\laffinobeef.html">Kudu Breakfast</a></li>
+                        <li><a href="C:\Users\moinr\Desktop\operationskudu\laffinochicken.html">kudu club</a></li>
+                        <li><a href="C:\Users\moinr\Desktop\operationskudu\veggiewrap.html">Egg sandwich</a></li>
+                        <li><a href="C:\Users\moinr\Desktop\operationskudu\falafelwrap.html">Eggs And Steak</a></li>
+                        <li><a href="C:\Users\moinr\Desktop\operationskudu\fishwrap.html">soon</a></li>
+                        <li><a href="C:\Users\moinr\Desktop\operationskudu\turkeywrap.html">soon</a></li>
+                        <li><a href="C:\Users\moinr\Desktop\operationskudu\hamwrap.html">soon</a></li>
+                    </ul>
+                </li>
+
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero">
+            <h1>Welcome</h1>
+            <p>A Real teacher can never be replaced!!</p>
+        </section>
+    </main>
+
+    <script>
+        function toggleMenu() {
+            const nav = document.querySelector('.nav-links');
+            nav.classList.toggle('active');
+        }
+
+        function toggleDropdown(event) {
+            event.preventDefault();
+            const parentLi = event.target.parentElement;
+            const dropdown = parentLi.querySelector('.dropdown');
+            
+            if (dropdown) {
+                dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
+            }
+        }
+    </script>
+</body>
+</html>
