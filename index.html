@@ -128,11 +128,19 @@
                 padding: 10px 20px;
             }
         }
+
+        .language-selector {
+            cursor: pointer;
+            color: white;
+            border: 1px solid white;
+            padding: 5px 10px;
+            border-radius: 5px;
+        }
     </style>
 </head>
 <body>
     <header>
-        <div class="logo">GHOST Portal</div>
+        <div class="logo" data-translate-key="logo">GHOST Portal</div>
         <div class="burger-menu" onclick="toggleMenu()">
             <div class="line"></div>
             <div class="line"></div>
@@ -140,71 +148,141 @@
         </div>
         <nav class="nav-links">
             <ul>
-                <li><a href="https://nuzhatkhan123.github.io/kudu/inv.apk">Inventory Ordering(apk)</a></li>
-                <li><a href="https://nuzhatkhan123.github.io/kudu/bpm.html">B.P.M</a></li>
+                <li><a href="https://nuzhatkhan123.github.io/kudu/inv.apk" data-translate-key="inventory">Inventory Ordering(apk)</a></li>
+                <li><a href="https://nuzhatkhan123.github.io/kudu/bpm.html" data-translate-key="bpm">B.P.M</a></li>
                 <li>
-                    <a href="services.html" onclick="toggleDropdown(event)">Burgers</a>
+                    <a href="services.html" onclick="toggleDropdown(event)" data-translate-key="burgers">Burgers</a>
                     <ul class="dropdown">
-                        <li><a href="https://nuzhatkhan123.github.io/kudu/quotro.html">Quotro Sandwich</a></li>
-                        <li><a href="https://nuzhatkhan123.github.io/kudu/kuduchickenregular.html">Kudu Chicken Regular</a></li>
-                        <li><a href="https://nuzhatkhan123.github.io/kudu/kuduchickenspicy.html">Kudu Chicken Spicy</a></li>
-                        <li><a href="https://nuzhatkhan123.github.io/kudu/kudubeef.html">Kudu Beef Sandwich</a></li>
-                        <li><a href="https://nuzhatkhan123.github.io/kudu/phillychicken.html">Philly Chicken</a></li>
-                        <li><a href="https://nuzhatkhan123.github.io/kudu/phillybeef.html">Philly Beef</a></li>
-                        <li><a href="https://nuzhatkhan123.github.io/kudu/chickenburger.html">Chicken Burger</a></li>
-                        <li><a href="https://nuzhatkhan123.github.io/kudu/clubsandwich.html">Klub Sandwich</a></li>
-                        <li><a href="veggieburger.html">Veggie Burger</a></li>
-                        <li><a href="cheeseburger.html">Cheese Burger</a></li>
-                        <li><a href="chickenburger.html">Chicken Burger</a></li>
+                        <li><a href="https://nuzhatkhan123.github.io/kudu/quotro.html" data-translate-key="quotro">Quotro Sandwich</a></li>
+                        <li><a href="https://nuzhatkhan123.github.io/kudu/kuduchickenregular.html" data-translate-key="kuduchickenregular">Kudu Chicken Regular</a></li>
+                        <li><a href="https://nuzhatkhan123.github.io/kudu/kuduchickenspicy.html" data-translate-key="kuduchickenspicy">Kudu Chicken Spicy</a></li>
+                        <li><a href="https://nuzhatkhan123.github.io/kudu/kudubeef.html" data-translate-key="kudubeef">Kudu Beef Sandwich</a></li>
+                        <li><a href="https://nuzhatkhan123.github.io/kudu/phillychicken.html" data-translate-key="phillychicken">Philly Chicken</a></li>
+                        <li><a href="https://nuzhatkhan123.github.io/kudu/phillybeef.html" data-translate-key="phillybeef">Philly Beef</a></li>
+                        <li><a href="https://nuzhatkhan123.github.io/kudu/chickenburger.html" data-translate-key="chickenburger">Chicken Burger</a></li>
+                        <li><a href="https://nuzhatkhan123.github.io/kudu/clubsandwich.html" data-translate-key="clubsandwich">Klub Sandwich</a></li>
+                        <li><a href="veggieburger.html" data-translate-key="veggieburger">Veggie Burger</a></li>
+                        <li><a href="cheeseburger.html" data-translate-key="cheeseburger">Cheese Burger</a></li>
+                        <li><a href="chickenburger.html" data-translate-key="chickenburger">Chicken Burger</a></li>
                     </ul>
                 </li>
                 <li>
-                    <a href="wraps.html" onclick="toggleDropdown(event)">Wraps</a>
+                    <a href="wraps.html" onclick="toggleDropdown(event)" data-translate-key="wraps">Wraps</a>
                     <ul class="dropdown">
-                        <li><a href="https://nuzhatkhan123.github.io/kudu/laffinobeef.html">Laffino Beef</a></li>
-                        <li><a href="https://nuzhatkhan123.github.io/kudu/laffinochicken.html">Lafino Chicken</a></li>
-                        <li><a href="C:\Users\moinr\Desktop\operationskudu\veggiewrap.html">soon</a></li>
-                        <li><a href="C:\Users\moinr\Desktop\operationskudu\falafelwrap.html">soon</a></li>
-                        <li><a href="C:\Users\moinr\Desktop\operationskudu\fishwrap.html">soon</a></li>
-                        <li><a href="C:\Users\moinr\Desktop\operationskudu\turkeywrap.html">soon</a></li>
-                        <li><a href="C:\Users\moinr\Desktop\operationskudu\hamwrap.html">soon</a></li>
+                        <li><a href="https://nuzhatkhan123.github.io/kudu/laffinobeef.html" data-translate-key="laffinobeef">Laffino Beef</a></li>
+                        <li><a href="https://nuzhatkhan123.github.io/kudu/laffinochicken.html" data-translate-key="laffinochicken">Lafino Chicken</a></li>
+                        <li><a href="C:\Users\moinr\Desktop\operationskudu\veggiewrap.html" data-translate-key="soon">soon</a></li>
+                        <li><a href="C:\Users\moinr\Desktop\operationskudu\falafelwrap.html" data-translate-key="soon">soon</a></li>
+                        <li><a href="C:\Users\moinr\Desktop\operationskudu\fishwrap.html" data-translate-key="soon">soon</a></li>
+                        <li><a href="C:\Users\moinr\Desktop\operationskudu\turkeywrap.html" data-translate-key="soon">soon</a></li>
+                        <li><a href="C:\Users\moinr\Desktop\operationskudu\hamwrap.html" data-translate-key="soon">soon</a></li>
                     </ul>
                 </li>
                 <li>
-                    <a href="wraps.html" onclick="toggleDropdown(event)">Break Fast</a>
+                    <a href="wraps.html" onclick="toggleDropdown(event)" data-translate-key="breakfast">Break Fast</a>
                     <ul class="dropdown">
-                        <li><a href="https://nuzhatkhan123.github.io/kudu/">Kudu Breakfast</a></li>
-                        <li><a href="https://nuzhatkhan123.github.io/kudu/">kudu club</a></li>
-                        <li><a href="C:\Users\moinr\Desktop\operationskudu\veggiewrap.html">Egg sandwich</a></li>
-                        <li><a href="C:\Users\moinr\Desktop\operationskudu\falafelwrap.html">Eggs And Steak</a></li>
-                        <li><a href="C:\Users\moinr\Desktop\operationskudu\fishwrap.html">soon</a></li>
-                        <li><a href="C:\Users\moinr\Desktop\operationskudu\turkeywrap.html">soon</a></li>
-                        <li><a href="C:\Users\moinr\Desktop\operationskudu\hamwrap.html">soon</a></li>
+                        <li><a href="https://nuzhatkhan123.github.io/kudu/" data-translate-key="kudubreakfast">Kudu Breakfast</a></li>
+                        <li><a href="https://nuzhatkhan123.github.io/kudu/" data-translate-key="kuduclub">kudu club</a></li>
+                        <li><a href="C:\Users\moinr\Desktop\operationskudu\veggiewrap.html" data-translate-key="eggsandwich">Egg sandwich</a></li>
+                        <li><a href="C:\Users\moinr\Desktop\operationskudu\falafelwrap.html" data-translate-key="eggsandsteak">Eggs And Steak</a></li>
+                        <li><a href="C:\Users\moinr\Desktop\operationskudu\fishwrap.html" data-translate-key="soon">soon</a></li>
+                        <li><a href="C:\Users\moinr\Desktop\operationskudu\turkeywrap.html" data-translate-key="soon">soon</a></li>
+                        <li><a href="C:\Users\moinr\Desktop\operationskudu\hamwrap.html" data-translate-key="soon">soon</a></li>
                     </ul>
                 </li>
-                <li><a href="contact.html">Contact</a></li>
+                <li><a href="contact.html" data-translate-key="contact">Contact</a></li>
             </ul>
         </nav>
+        <div class="language-selector" onclick="toggleLanguage()">English/العربية</div>
     </header>
 
     <main>
         <section class="hero">
-            <h1>Welcome</h1>
-            <p>A Real teacher can never be replaced!!</p>
+            <h1 data-translate-key="welcome">Welcome</h1>
+            <p data-translate-key="hero-text">A Real teacher can never be replaced!!</p>
         </section>
     </main>
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const password = prompt("Please enter the password to continue:");
-
-            if (password === "ghost123") { // Replace "yourpassword" with the actual password
+            if (password === "ghost123") {
                 document.body.style.display = "block";
             } else {
-                alert("Incorrect password. Access denied.");
-                window.location.href = "about:blank"; // Redirects to a blank page
+                alert("Incorrect password");
+                window.location.href = "about:blank";
             }
         });
+
+        const translations = {
+            "en": {
+                "logo": "GHOST Portal",
+                "inventory": "Inventory Ordering(apk)",
+                "bpm": "B.P.M",
+                "burgers": "Burgers",
+                "quotro": "Quotro Sandwich",
+                "kuduchickenregular": "Kudu Chicken Regular",
+                "kuduchickenspicy": "Kudu Chicken Spicy",
+                "kudubeef": "Kudu Beef Sandwich",
+                "phillychicken": "Philly Chicken",
+                "phillybeef": "Philly Beef",
+                "chickenburger": "Chicken Burger",
+                "clubsandwich": "Klub Sandwich",
+                "veggieburger": "Veggie Burger",
+                "cheeseburger": "Cheese Burger",
+                "wraps": "Wraps",
+                "laffinobeef": "Laffino Beef",
+                "laffinochicken": "Lafino Chicken",
+                "soon": "soon",
+                "breakfast": "Break Fast",
+                "kudubreakfast": "Kudu Breakfast",
+                "kuduclub": "kudu club",
+                "eggsandwich": "Egg sandwich",
+                "eggsandsteak": "Eggs And Steak",
+                "contact": "Contact",
+                "welcome": "Welcome",
+                "hero-text": "A Real teacher can never be replaced!!"
+            },
+            "ar": {
+                "logo": "بوابة الشبح",
+                "inventory": "طلب المخزون (apk)",
+                "bpm": "B.P.M",
+                "burgers": "برغر",
+                "quotro": "ساندويتش كوترو",
+                "kuduchickenregular": "دجاج كودو العادي",
+                "kuduchickenspicy": "دجاج كودو الحار",
+                "kudubeef": "ساندويتش لحم بقري كودو",
+                "phillychicken": "دجاج فيلي",
+                "phillybeef": "لحم فيلي",
+                "chickenburger": "برغر دجاج",
+                "clubsandwich": "كلوب ساندويتش",
+                "veggieburger": "برغر نباتي",
+                "cheeseburger": "برغر جبن",
+                "wraps": "لفائف",
+                "laffinobeef": "لافينو لحم",
+                "laffinochicken": "لافينو دجاج",
+                "soon": "قريبا",
+                "breakfast": "الإفطار",
+                "kudubreakfast": "فطور كودو",
+                "kuduclub": "نادي كودو",
+                "eggsandwich": "ساندويتش بيض",
+                "eggsandsteak": "بيض ولحم",
+                "contact": "اتصال",
+                "welcome": "مرحبا",
+                "hero-text": "لا يمكن استبدال المعلم الحقيقي!!"
+            }
+        };
+
+        function toggleLanguage() {
+            const currentLang = document.documentElement.lang || "en";
+            const newLang = currentLang === "en" ? "ar" : "en";
+            document.documentElement.lang = newLang;
+
+            document.querySelectorAll('[data-translate-key]').forEach(element => {
+                const key = element.getAttribute('data-translate-key');
+                element.textContent = translations[newLang][key];
+            });
+        }
 
         function toggleMenu() {
             const nav = document.querySelector('.nav-links');
