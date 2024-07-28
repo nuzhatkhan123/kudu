@@ -12,6 +12,7 @@
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
+            display: none; /* Initially hide the body */
         }
 
         header {
@@ -92,10 +93,6 @@
             background-color: rgba(0, 0, 0, 0.5); /* Slightly transparent background for text visibility */
             color: white;
             text-align: center;
-            background-image: url('path/to/your/image.jpg'); /* Replace with the path to your image */
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
         }
 
         .hero p {
@@ -173,7 +170,7 @@
                         <li><a href="C:\Users\moinr\Desktop\operationskudu\hamwrap.html">soon</a></li>
                     </ul>
                 </li>
- <li>
+                <li>
                     <a href="wraps.html" onclick="toggleDropdown(event)">Break Fast</a>
                     <ul class="dropdown">
                         <li><a href="https://nuzhatkhan123.github.io/kudu/">Kudu Breakfast</a></li>
@@ -185,7 +182,6 @@
                         <li><a href="C:\Users\moinr\Desktop\operationskudu\hamwrap.html">soon</a></li>
                     </ul>
                 </li>
-
                 <li><a href="contact.html">Contact</a></li>
             </ul>
         </nav>
@@ -199,6 +195,17 @@
     </main>
 
     <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const password = prompt("Please enter the password to continue:");
+
+            if (password === "ghost123") { // Replace "yourpassword" with the actual password
+                document.body.style.display = "block";
+            } else {
+                alert("Incorrect password. Access denied.");
+                window.location.href = "about:blank"; // Redirects to a blank page
+            }
+        });
+
         function toggleMenu() {
             const nav = document.querySelector('.nav-links');
             nav.classList.toggle('active');
@@ -208,7 +215,7 @@
             event.preventDefault();
             const parentLi = event.target.parentElement;
             const dropdown = parentLi.querySelector('.dropdown');
-            
+
             if (dropdown) {
                 dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
             }
