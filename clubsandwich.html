@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>club sandwich</title>
+    <title>Club Sandwich</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -46,39 +46,73 @@
             margin: 5px;
             color: white;
         }
+
+        .language-selector {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            cursor: pointer;
+            color: white;
+            border: 1px solid white;
+            padding: 5px 10px;
+            border-radius: 5px;
+        }
     </style>
 </head>
 <body>
+    <div class="language-selector" onclick="toggleLanguage()">English/العربية</div>
     <div class="overlay">
         <div class="flowchart">
-            <div class="box">
-                <p>club sandwich</p>
+            <div class="box" data-translate-key="clubSandwich">
+                <p>Club Sandwich</p>
             </div>
             <div class="arrow">
                 <p>&darr;</p>
             </div>
-            <div class="box">
-                <p>Step 1: "toast 4 pieces of bread (white or multigrain)"</p>
+            <div class="box" data-translate-key="step1">
+                <p>Step 1: Toast 4 pieces of bread (white or multigrain)</p>
             </div>
             <div class="arrow">
                 <p>&darr;</p>
             </div>
-            <div class="box">
-                <p>Step 2: put 7 grams mayo on all slices 28 intotal, put 35 grams lettuce ,smoked chicken and swiss ceese on one / one piece of round tomato smoked beef one sclice and american cheese one one/one piece of smoked turkey and one mashed egg on another peice respectively   </p>
+            <div class="box" data-translate-key="step2">
+                <p>Step 2: Put 7 grams mayo on all slices (28 grams in total), put 35 grams lettuce, smoked chicken and Swiss cheese on one slice, one piece of round tomato, smoked beef, one slice of American cheese on one slice, and smoked turkey and one mashed egg on another piece respectively</p>
             </div>
             <div class="arrow">
                 <p>&darr;</p>
             </div>
-            <div class="box">
-                
-            </div>
-            <div class="arrow">
-                <p>&darr;</p>
-            </div>
-            <div class="box">
-                <p>Step 4: stack the bread turkey over beef over chicken slice the bread diagonally in the partitions of 4 , put in box and serve </p>
+            <div class="box" data-translate-key="step4">
+                <p>Step 4: Stack the bread, turkey over beef over chicken, slice the bread diagonally into 4 partitions, put in box and serve</p>
             </div>
         </div>
     </div>
+
+    <script>
+        const translations = {
+            "en": {
+                "clubSandwich": "Club Sandwich",
+                "step1": "Step 1: Toast 4 pieces of bread (white or multigrain)",
+                "step2": "Step 2: Put 7 grams mayo on all slices (28 grams in total), put 35 grams lettuce, smoked chicken and Swiss cheese on one slice, one piece of round tomato, smoked beef, one slice of American cheese on one slice, and smoked turkey and one mashed egg on another piece respectively",
+                "step4": "Step 4: Stack the bread, turkey over beef over chicken, slice the bread diagonally into 4 partitions, put in box and serve"
+            },
+            "ar": {
+                "clubSandwich": "ساندويتش النادي",
+                "step1": "الخطوة 1: تحميص 4 قطع من الخبز (أبيض أو متعدد الحبوب)",
+                "step2": "الخطوة 2: ضع 7 جرام من المايونيز على جميع الشرائح (28 جرامًا إجمالاً)، ضع 35 جرام من الخس، الدجاج المدخن والجبن السويسري على شريحة واحدة، قطعة واحدة من الطماطم المستديرة، اللحم البقري المدخن، شريحة واحدة من الجبن الأمريكي على شريحة واحدة، والديك الرومي المدخن وبيضة واحدة مهروسة على قطعة أخرى على التوالي",
+                "step4": "الخطوة 4: رص الخبز، الديك الرومي فوق اللحم البقري فوق الدجاج، قطع الخبز بشكل مائل إلى 4 أقسام، وضعها في الصندوق وتقديمها"
+            }
+        };
+
+        function toggleLanguage() {
+            const currentLang = document.documentElement.lang || "en";
+            const newLang = currentLang === "en" ? "ar" : "en";
+            document.documentElement.lang = newLang;
+
+            document.querySelectorAll('[data-translate-key]').forEach(element => {
+                const key = element.getAttribute('data-translate-key');
+                element.textContent = translations[newLang][key];
+            });
+        }
+    </script>
 </body>
 </html>
