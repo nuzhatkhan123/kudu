@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Expiry Date List</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: url('https://uploads-ssl.webflow.com/5ce16c2f7c5e2f36c000584e/5e1c2d42482f85948dcd59d2_maxresdefault.jpg') no-repeat center center fixed;
+            background-size: cover;
+            margin: 0;
+        }
+        .container {
+            background-color: rgba(255, 255, 255, 0.8);
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            position: relative; /* Added for positioning the icon-bar */
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+        label {
+            margin-bottom: 5px;
+        }
+        input[type="text"], input[type="date"] {
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        button {
+            padding: 10px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-bottom: 10px;
+        }
+        button:hover {
+            background-color: #218838;
+        }
+        .clear-btn {
+            background-color: #dc3545;
+        }
+        .clear-btn:hover {
+            background-color: #c82333;
+        }
+        .export-btn {
+            background-color: #007bff;
+        }
+        .export-btn:hover {
+            background-color: #0056b3;
+        }
+        .result {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #e9ecef;
+            border: 1px solid #ced4da;
+            border-radius: 4px;
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        li {
+            padding: 5px 0;
+        }
+        .red {
+            color: red;
+        }
+        .orange {
+            color: orange;
+        }
+        .green {
+            color: green;
+        }
+        .icon-bar {
+            position: absolute;
+            bottom: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 10px;
+        }
+        .icon-bar a {
+            display: block;
+            width: 40px;
+            height: 40px;
+        }
+        .icon-bar img {
+            width: 100%;
+            height: auto;
+            border-radius: 50%;
+            transition: transform 0.3s;
+        }
+        .icon-bar a:hover img {
+            transform: scale(1.1);
+        }
+        .facebook img { background-color: #3b5998; }
+        .whatsapp img { background-color: #25D366; }
+        .linkedin img { background-color: #0077b5; }
+        .instagram img { background-color: #C13584; }
+        .gmail img { background-color: #d14836; }
+        .phone img { background-color: #34b7f1; }
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/xlsx/dist/xlsx.full.min.js"></script>
+</head>
+<body>
+
+<div class="container">
+    <form id="expiryForm">
+        <label for="productName">Enter Product Name:</label>
+        <input type="text" id="productName" name="productName" required>
+        <label for="expiryDate">Enter Expiry Date:</label>
+        <input type="date" id="expiryDate" name="expiryDate" required>
+        <button type="submit">Add Product</button>
+    </form>
+    <button class="clear-btn" id="clearData">Clear Data</button>
+    <button class="export-btn" id="exportData">Export to Excel</button>
+    <div class="result">
+        <h3>Product List:</h3>
+        <ul id="productList"></ul>
+    </div>
+
+    <!-- Social Media Icons -->
+    <div class="icon-bar">
+        <a href="https://www.facebook.com/ranzao" target="_blank" class="facebook"><img src="https://nuzhatkhan123.github.io/kudu/f.png" alt="Facebook"></a>
+        <a href="https://wa.me/916006476187?text=Hello%20there!" target="_blank" class="whatsapp"><img src="https://nuzhatkhan123.github.io/kudu/wh.png" alt="WhatsApp"></a>
+        <a href="https://www.linkedin.com/in/mueen-khan-1448ab2a1/" target="_blank" class="linkedin"><img src="https://nuzhatkhan123.github.io/kudu/li.jpeg" alt="LinkedIn"></a>
+        <a href="https://www.instagram.com/areeba_zahra_khan/" target="_blank" class="instagram"><img src="https://nuzhatkhan123.github.io/kudu/in.webp" alt="Instagram"></a>
+        <a href="mailto:moinranzao2@gmail.com" target="_blank" class="gmail"><img src="https://nuzhatkhan123.github.io/kudu/gm.png" alt="Gmail"></a>
+        <a href="tel:+916006476187" target="_blank" class="phone"><img src="https://nuzhatkhan123.github.io/kudu/ph.jpeg" alt="Call"></a>
+    </div>
+</div>
+
+<audio id="alertSound" src="https://www.soundjay.com/button/beep-07.wav" preload="auto"></audio>
+
+<script>
+    document.getElementById('expiryForm').addEventListener('submit', function(event) {
+        event.preventDefault();
+        
+        const productName = document.getElementById('productName').value;
+        const expiryDate = document.getElementById('expiryDate').value;
+        const expiryDateObj = new Date(expiryDate);
+        const daysRemaining = calculateDaysRemaining(expiryDateObj);
+        const dayOfWeek = expiryDateObj.toLocaleDateString('en-US', { weekday: 'long' });
+        
+        const product = {
+            name: productName,
+            date: expiryDate,
+            daysRemaining: daysRemaining,
+            dayOfWeek: dayOfWeek
+        };
+        
+        addProductToList(product);
+        saveProductToLocalStorage(product);
+        
+        // Clear the form fields
+        document.getElementById('productName').value = '';
+        document.getElementById('expiryDate').value = '';
+    });
+
+    document.getElementById('clearData').addEventListener('click', function() {
+        localStorage.removeItem('products');
+        document.getElementById('productList').innerHTML = '';
+    });
+
+    document.getElementById('exportData').addEventListener('click', function() {
+        exportToExcel();
+    });
+
+    function addProductToList(product) {
+        const productListItem = document.createElement('li');
+        productListItem.textContent = `Product: "${product.name}", Expiry Date: ${product.date} (${product.dayOfWeek}), Days Remaining: ${product.daysRemaining}`;
+        
+        if (product.daysRemaining < 5) {
+            productListItem.classList.add('red');
+        } else if (product.daysRemaining <= 10) {
+            productListItem.classList.add('orange');
+        } else {
+            productListItem.classList.add('green');
+        }
+        
+        document.getElementById('productList').appendChild(productListItem);
+    }
+
+    function saveProductToLocalStorage(product) {
+        let products = JSON.parse(localStorage.getItem('products')) || [];
+        products.push(product);
+        localStorage.setItem('products', JSON.stringify(products));
+    }
+
+    function loadProductsFromLocalStorage() {
+        let products = JSON.parse(localStorage.getItem('products')) || [];
+        products.forEach(product => {
+            addProductToList(product);
+        });
+    }
+
+    function calculateDaysRemaining(expiryDateObj) {
+        const currentDate = new Date();
+        const timeDiff = expiryDateObj - currentDate;
+        return Math.ceil(timeDiff / (1000 * 3600 * 24));
+    }
+
+    function updateProductList() {
+        document.getElementById('productList').innerHTML = '';
+        let products = JSON.parse(localStorage.getItem('products')) || [];
+        let expiredProducts = [];
+        products.forEach(product => {
+            const updatedDaysRemaining = calculateDaysRemaining(new Date(product.date));
+            product.daysRemaining = updatedDaysRemaining;
+            if (updatedDaysRemaining < 0) {
+                expiredProducts.push({
+                    name: product.name,
+                    date: product.date,
+                    daysRemaining: updatedDaysRemaining
+                });
+            }
+            addProductToList(product);
+        });
+        // Save updated products to local storage
+        localStorage.setItem('products', JSON.stringify(products));
+
+        // Play sound and show detailed alert for expired products
+        if (expiredProducts.length > 0) {
+            let message = "Warning: The following products have expired and need to be discarded:\n\n";
+            expiredProducts.forEach(product => {
+                message += `Product: "${product.name}", Expiry Date: ${product.date}, Days Past Expiry: ${-product.daysRemaining}\n`;
+            });
+            // Play the alert sound
+            const alertSound = document.getElementById('alertSound');
+            alertSound.play().catch(error => {
+                console.log('Audio playback error:', error);
+            });
+            // Show the alert
+            alert(message);
+        }
+    }
+
+    function exportToExcel() {
+        let products = JSON.parse(localStorage.getItem('products')) || [];
+        if (products.length === 0) {
+            alert('No data to export');
+            return;
+        }
+
+        const worksheet = XLSX.utils.json_to_sheet(products);
+        const workbook = XLSX.utils.book_new();
+        XLSX.utils.book_append_sheet(workbook, worksheet, "Products");
+        XLSX.writeFile(workbook, "products.xlsx");
+    }
+
+    // Load products and update expiry details when the page loads
+    window.onload = function() {
+        loadProductsFromLocalStorage();
+        updateProductList(); // Initial update
+        // Update product list every hour
+        setInterval(updateProductList, 3600000); // 3600000 ms = 1 hour
+    };
+</script>
+
+</body>
+</html>
