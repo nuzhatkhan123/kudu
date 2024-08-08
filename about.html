@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="theme-color" content="#f53f2b">
+    <meta http-equiv="x-ua-compatible" content="ie=edge" />
+    <meta name="description" content="Portfolio To your site">
+    <meta name="keywords" content="HTML, CSS, JavaScript, wordpress, Developer">
+    <meta name="author" content="mueen khan">
+    <link rel="shortcut icon" href="assets/img/aboutme.jpg" type="image/x-icon">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="assets/css/main.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@master/devicon.min.css">
+    <script src="https://kit.fontawesome.com/4019246ab4.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+    <title>Mueen khan | Web designer/restaurant manager</title>
+    <style>
+       body {
+    background: linear-gradient(135deg, #a1c4fd, #c2e9fb); /* Light blue gradient background */
+    margin: 0;
+    font-family: 'Arial', sans-serif;
+}
+
+.landing {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 60px;
+    text-align: center;
+}
+
+.img img {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    border: 4px solid #fff; /* White border around the image */
+}
+
+.me h2, .me h3 {
+    color: #333;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2); /* Subtle text shadow */
+}
+
+.about {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 30px;
+    background: rgba(255, 255, 255, 0.9); /* Light, semi-transparent background */
+    border-radius: 10px;
+    color: #333;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+}
+
+.title {
+    font-size: 2.5em;
+    color: #f53f2b; /* Bright accent color */
+    margin-bottom: 20px;
+    font-weight: bold;
+}
+
+.card-wrapper {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 20px; /* Add space between cards */
+}
+
+.box {
+    background: #ffffff; /* White background for cards */
+    padding: 20px;
+    border-radius: 10px;
+    flex-basis: 30%;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.box:hover {
+    transform: translateY(-10px); /* Slight lift effect on hover */
+    box-shadow: 0 0 25px rgba(0, 0, 0, 0.2);
+}
+
+.box img {
+    max-width: 100%;
+    border-radius: 10px;
+}
+
+.resume button, button {
+    padding: 12px 25px;
+    background: #f53f2b; /* Bright button color */
+    border: none;
+    border-radius: 5px;
+    color: #fff;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.resume button:hover, button:hover {
+    background: #c62828; /* Darker shade on hover */
+}
+
+.mainlist {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.sublist {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.icon {
+    margin-right: 15px;
+}
+
+.icon img, .icon i {
+    width: 40px;
+    height: 40px;
+}
+
+.footer {
+    text-align: center;
+    margin-top: 30px;
+    font-size: 0.9em;
+    color: #333;
+}
+
+.footer a {
+    color: #f53f2b;
+    text-decoration: none;
+}
+
+.social-icons-bar {
+    position: fixed;
+    bottom: 10px;
+    right: 10px;
+    background: rgba(0, 0, 0, 0.8);
+    padding: 15px;
+    border-radius: 10px;
+    display: none;
+    flex-direction: column;
+    align-items: center;
+}
+
+.social-icons-bar.active {
+    display: flex;
+}
+
+.social-icons-bar a {
+    margin: 5px;
+    color: #fff;
+}
+
+.social-icons-bar img {
+    width: 28px;
+    height: 28px;
+}
+
+.social-toggle {
+    position: fixed;
+    bottom: 10px;
+    right: 10px;
+    cursor: pointer;
+    background: #333;
+    padding: 10px;
+    border-radius: 50%;
+}
+
+.social-toggle .toggle-line {
+    width: 30px;
+    height: 4px;
+    background: #fff;
+    margin: 5px 0;
+    transition: background 0.3s ease;
+}
+
+.social-toggle:hover .toggle-line {
+    background: #f53f2b; /* Change color on hover */
+}
+
+    </style>
+</head>
+
+<body>
+    <div class="landing">
+        <div class="img animate__animated animate__slideInDown wow" data-wow-duration="1.5s" data-wow-delay="0.3s">
+            <img src="https://mueenulislam.github.io/f4.jpg" alt="I’m here">
+        </div>
+        <div class="me animate__animated animate__slideInUp wow" data-wow-duration="1.5s" data-wow-delay="0.3s">
+            <section class="shortme">
+                <h2>Mueen khan aka Ghost!!</h2>
+            </section>
+            <h3 id="typed"></h3>
+        </div>
+    </div>
+    <div class="about">
+        <div class="title">Portfolio</div>
+        <div class="card-wrapper">
+            <div class="box box1 animate__animated animate__slideInLeft wow" data-wow-duration="1s" data-wow-delay="0s">
+                <span><b>About Me</b></span>
+                <img src="https://mueenulislam.github.io/f2.jpg" alt="About Me">
+                <p>Hey I am Mueen ul islam khan aka ghost!, India.<br>I have degree in computer applications <br> I love to design websites and have pursued a career in restaurant fields as a passion and wish to evolve beyond boundaries.</p>
+               
+            </div>
+            <div class="box box2 animate__animated animate__slideInUp wow" data-wow-duration="1s" data-wow-delay="0.37s">
+                <span><b>Skills</b></span>
+                <br><span>Programming</span>
+                <ul class="mainlist">
+                    <ul class="sublist">
+                        <li class="icon"><i class="devicon-c-plain-wordmark"></i></li>
+                        <li>C</li>
+                    </ul>
+                    <ul class="sublist">
+                        <li class="icon"><i class="devicon-cplusplus-plain-wordmark"></i></li>
+                        <li>C++</li>
+                    </ul>
+                    <ul class="sublist">
+                        <li class="icon"><i class="devicon-java-plain-wordmark"></i></li>
+                        <li>Java</li>
+                    </ul>
+                    <ul class="sublist">
+                        <li class="icon"><i class="devicon-css3-plain-wordmark"></i></li>
+                        <li>CSS</li>
+                    </ul>
+                    <ul class="sublist">
+                        <li class="icon"><i class="devicon-html5-plain-wordmark"></i></li>
+                        <li>HTML</li>
+                    </ul>
+                </ul>
+                <span style="width: 100%; text-align: center;">Operational Skills</span>
+                <ul class="mainlist">
+                    <ul class="sublist">
+                        <li class="icon"><img src="https://tse4.mm.bing.net/th?id=OIP.m4EJP1cLm33NI4UzigoQZwHaHT&pid=Api&P=0&h=220" alt="P&L" /></li>
+                        <li>P&L</li>
+                    </ul>
+                    <ul class="sublist">
+                        <li class="icon"><img src="https://tse3.mm.bing.net/th?id=OIP.9O4Z-ySNHWDszMOxmffJlQHaHB&pid=Api&P=0&h=220" alt="Inventory" /></li>
+                        <li>Inventory</li>
+                    </ul>
+                    <ul class="sublist">
+                        <li class="icon"><img src="https://tse3.mm.bing.net/th?id=OIP.k5OzkgIusvUxAl4pw0usYQHaHX&pid=Api&P=0&h=220" alt="Shift Leader" /></li>
+                        <li>Shift Leader</li>
+                    </ul>
+                    <ul class="sublist">
+                        <li class="icon"><img src="https://tse1.mm.bing.net/th?id=OIP.YsEhKvx5eTWkiCAFvOjPogHaHa&pid=Api&P=0&h=220" alt="Quality" /></li>
+                        <li>Quality</li>
+                    </ul>
+                </ul>
+                <span></span>
+                <ul class="mainlist">
+                    <ul class="sublist">
+                        <li class="icon"><img src="https://tse3.mm.bing.net/th?id=OIP.eF2DaMcC6NER-6oduDT7GAAAAA&pid=Api&P=0&h=220" alt="Management" /></li>
+                        <li>Management</li>
+                    </ul>
+                    <ul class="sublist">
+                        <li class="icon"><img src="https://tse1.mm.bing.net/th?id=OIP.3f0gUGI25zGvAWtQjTD6aAHaEv&pid=Api&P=0&h=220" alt="Teamwork" /></li>
+                        <li>Teamwork</li>
+                    </ul>
+                    <ul class="sublist">
+                        <li class="icon"><img src="https://tse3.mm.bing.net/th?id=OIP.JFODPH9FFXq0AOYsdh-wrgHaE8&pid=Api&P=0&h=220" alt="Cost Control" /></li>
+                        <li>Cost Control</li>
+                    </ul>
+                    <ul class="sublist">
+                        <li class="icon"><img src="https://tse3.mm.bing.net/th?id=OIP.zZ0sml9NefagCqfnvtKh9wHaE7&pid=Api&P=0&h=220" alt="Feedback" /></li>
+                        <li>Feedback</li>
+                    </ul>
+                    <ul class="sublist">
+                        <li class="icon"><img src="https://tse1.mm.bing.net/th?id=OIP.-5Hq5HMRK_o9foRWbcchUQHaEc&pid=Api&P=0&h=220" alt="Training" /></li>
+                        <li>Training</li>
+                    </ul>
+                </ul>
+            </div>
+            <div class="box box3 animate__animated animate__slideInRight wow" data-wow-duration="1s" data-wow-delay="0.75s">
+                <div>
+                    <ul>
+                        <li><a href="https://www.linkedin.com/in/mueen-khan-1448ab2a1/" target="_blank"><i class="fab fa-linkedin-in iconn"></i></a></li>
+                        <li><a href="mailto:moinranzao2@gmail.com" target="_blank"><i class="fas fa-at iconn"></i></a></li>
+                    </ul>
+                </div>
+                <div class="footer">Made with❤️ by <a href="https://www.facebook.com/media/set/?set=a.109571042499743&type=3">Ghost</a></div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11"></script>
+    <script>
+        var typed = new Typed("#typed", {
+            strings: ['Programmer', 'web Designer', ' S.S.V Hardees', 'A.R.M KUDU'],
+            typeSpeed: 50,
+            smartBackspace: true,
+            backSpeed: 35,
+            loop: true,
+            showCursor: false,
+        });
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/wow/1.1.2/wow.min.js" integrity="sha512-Eak/29OTpb36LLo2r47IpVzPBLXnAMPAVypbSZiZ4Qkf8p/7S/XRG5xp7OKWPPYfJT6metI+IORkR5G8F900+g==" crossorigin="anonymous"></script>
+    <script>
+        new WOW().init();
+    </script>
+
+    <script>
+        function toggleSocialIcons() {
+            const socialIconsBar = document.querySelector('.social-icons-bar');
+            socialIconsBar.classList.toggle('active');
+        }
+    </script>
+</body>
+
+</html>
