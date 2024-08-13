@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form Example</title>
+    <style>
+        body 
+
+ {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 20px;
+    background-image: url('https://www.rtgsolutionsgroup.com/wp-content/uploads/2019/08/inventory-management.jpeg'); /* URL to your image */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+
+
+{
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+        .container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr); /* Adjusted to 3 columns */
+            gap: 20px;
+            max-width: 1800px;
+            margin: 0 auto;
+        }
+        .box {
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 20px;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        .form-group input, .form-group select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        .form-group button {
+            background-color: #28a745;
+            color: #fff;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-right: 10px;
+        }
+        .form-group button:hover {
+            background-color: #218838;
+        }
+        .btn-red {
+            background-color: #dc3545;
+        }
+        .btn-red:hover {
+            background-color: #c82333;
+        }
+        .result {
+            margin-top: 20px;
+        }
+        .transaction {
+            background: #f9f9f9;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            padding: 15px;
+            margin-bottom: 10px;
+        }
+        .transaction h2 {
+            margin-top: 0;
+        }
+        /* Center Master Filter Form */
+        #masterFilterBox {
+            grid-column: span 3; /* Adjusted to span 3 columns */
+            text-align: center;
+        }
+        #masterFilterBox .form-group {
+            display: inline-block;
+            margin: 0 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Receiving Form -->
+        <div class="box">
+            <h1>RECEIVING</h1>
+            <form id="receivingForm">
+                <div class="form-group">
+                    <label for="receivingItemName">Item Name:</label>
+                    <input type="text" id="receivingItemName" name="receivingItemName" required>
+                </div>
+                <div class="form-group">
+                    <label for="receivingQuantity">Quantity:</label>
+                    <select id="receivingQuantity" name="receivingQuantity" required>
+                        <option value="">Select quantity</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        <option value="6">6</option>
+                        <option value="7">7</option>
+                        <option value="8">8</option>
+                        <option value="9">9</option>
+                        <option value="10">10</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="receivingDate">Date:</label>
+                    <input type="date" id="receivingDate" name="receivingDate" required>
+                </div>
+                <div class="form-group">
+                    <button type="button" onclick="saveData('receiving')">Save</button>
+                    <button type="button" onclick="clearData('receiving')">Clear All</button>
+                    <button type="button" onclick="exportToExcel('receiving')">Export to Excel</button>
+                </div>
+            </form>
+
+            <div class="form-group">
+                <label for="receivingStartDate">Start Date:</label>
+                <input type="date" id="receivingStartDate">
+            </div>
+            <div class="form-group">
+                <label for="receivingEndDate">End Date:</label>
+                <input type="date" id="receivingEndDate">
+            </div>
+            <div class="form-group">
+                <label for="receivingSearchItem">Search Item:</label>
+                <input type="text" id="receivingSearchItem">
+            </div>
+            <div class="form-group">
+                <button type="button" onclick="filterData('receiving')">search item</button>
+            </div>
+
+            <div class="result" id="receivingResult"></div>
+            <div class="result" id="receivingSummary"></div>
+        </div>
+
+        <!-- Transfer In Form -->
+        <div class="box">
+            <h1>TRANSFER IN</h1>
+            <form id="transferInForm">
+                <div class="form-group">
+                    <label for="transferInItemName">Item Name:</label>
+                    <input type="text" id="transferInItemName" name="transferInItemName" required>
+                </div>
+                <div class="form-group">
+                    <label for="transferInQuantity">Quantity:</label>
+                    <select id="transferInQuantity" name="transferInQuantity" required>
+                        <option value="">Select quantity</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        <option value="6">6</option>
+                        <option value="7">7</option>
+                        <option value="8">8</option>
+                        <option value="9">9</option>
+                        <option value="10">10</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="transferInDate">Date:</label>
+                    <input type="date" id="transferInDate" name="transferInDate" required>
+                </div>
+                <div class="form-group">
+                    <label for="transferInWhereFrom">Where From:</label>
+                    <input type="text" id="transferInWhereFrom" name="transferInWhereFrom" required>
+                </div>
+                <div class="form-group">
+                    <button type="button" onclick="saveData('transferIn')">Save</button>
+                    <button type="button" onclick="clearData('transferIn')">Clear All</button>
+                    <button type="button" onclick="exportToExcel('transferIn')">Export to Excel</button>
+                </div>
+            </form>
+
+            <div class="form-group">
+                <label for="transferInStartDate">Start Date:</label>
+                <input type="date" id="transferInStartDate">
+            </div>
+            <div class="form-group">
+                <label for="transferInEndDate">End Date:</label>
+                <input type="date" id="transferInEndDate">
+            </div>
+            <div class="form-group">
+                <label for="transferInSearchItem">Search Item:</label>
+                <input type="text" id="transferInSearchItem">
+            </div>
+            <div class="form-group">
+                <button type="button" onclick="filterData('transferIn')">search item</button>
+            </div>
+
+            <div class="result" id="transferInResult"></div>
+            <div class="result" id="transferInSummary"></div>
+        </div>
+
+        <!-- Transfer Out Form -->
+        <div class="box">
+            <h1>TRANSFER OUT</h1>
+            <form id="transferOutForm">
+                <div class="form-group">
+                    <label for="transferOutItemName">Item Name:</label>
+                    <input type="text" id="transferOutItemName" name="transferOutItemName" required>
+                </div>
+                <div class="form-group">
+                    <label for="transferOutQuantity">Quantity:</label>
+                    <select id="transferOutQuantity" name="transferOutQuantity" required>
+                        <option value="">Select quantity</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        <option value="6">6</option>
+                        <option value="7">7</option>
+                        <option value="8">8</option>
+                        <option value="9">9</option>
+                        <option value="10">10</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="transferOutDate">Date:</label>
+                    <input type="date" id="transferOutDate" name="transferOutDate" required>
+                </div>
+                <div class="form-group">
+                    <label for="transferOutWhereTo">Where To:</label>
+                    <input type="text" id="transferOutWhereTo" name="transferOutWhereTo" required>
+                </div>
+                <div class="form-group">
+                    <button type="button" onclick="saveData('transferOut')">Save</button>
+                    <button type="button" onclick="clearData('transferOut')">Clear All</button>
+                    <button type="button" onclick="exportToExcel('transferOut')">Export to Excel</button>
+                </div>
+            </form>
+
+            <div class="form-group">
+                <label for="transferOutStartDate">Start Date:</label>
+                <input type="date" id="transferOutStartDate">
+            </div>
+            <div class="form-group">
+                <label for="transferOutEndDate">End Date:</label>
+                <input type="date" id="transferOutEndDate">
+            </div>
+            <div class="form-group">
+                <label for="transferOutSearchItem">Search Item:</label>
+                <input type="text" id="transferOutSearchItem">
+            </div>
+            <div class="form-group">
+                <button type="button" onclick="filterData('transferOut')">search item</button>
+            </div>
+
+            <div class="result" id="transferOutResult"></div>
+            <div class="result" id="transferOutSummary"></div>
+        </div>
+
+        <!-- Master Report -->
+        <div class="box" id="masterFilterBox">
+            <h1>MASTER REPORT</h1>
+            <form id="masterFilterForm">
+                <div class="form-group">
+                    <label for="masterStartDate">Start Date:</label>
+                    <input type="date" id="masterStartDate">
+                </div>
+                <div class="form-group">
+                    <label for="masterEndDate">End Date:</label>
+                    <input type="date" id="masterEndDate">
+                </div>
+                <div class="form-group">
+                    <label for="masterSearchItem">Search Item:</label>
+                    <input type="text" id="masterSearchItem">
+                </div>
+                <div class="form-group">
+                    <button type="button" onclick="generateMasterReport()">Generate Report</button>
+                </div>
+            </form>
+
+            <div class="result" id="masterResult"></div>
+            <div class="result" id="masterSummary"></div>
+        </div>
+    </div>
+
+    <script>
+        // Load data from localStorage
+        function loadData() {
+            const data = {
+                receiving: JSON.parse(localStorage.getItem('receivingData')) || [],
+                transferIn: JSON.parse(localStorage.getItem('transferInData')) || [],
+                transferOut: JSON.parse(localStorage.getItem('transferOutData')) || []
+            };
+            return data;
+        }
+
+        // Save data to localStorage
+        function saveDataToStorage(type, data) {
+            localStorage.setItem(`${type}Data`, JSON.stringify(data[type]));
+        }
+
+        // Sample data storage
+        let data = loadData();
+
+        function saveData(type) {
+            let itemName = document.getElementById(`${type}ItemName`).value.trim();
+            let quantity = parseInt(document.getElementById(`${type}Quantity`).value);
+            let date = document.getElementById(`${type}Date`).value;
+            let whereFromOrTo = type === 'transferIn' ? document.getElementById(`${type}WhereFrom`).value.trim() : type === 'transferOut' ? document.getElementById(`${type}WhereTo`).value.trim() : '';
+
+            if (!itemName || isNaN(quantity) || !date) {
+                alert('Please fill in all fields.');
+                return;
+            }
+
+            data[type].push({ itemName, quantity, date, whereFromOrTo });
+            saveDataToStorage(type, data);
+            alert(`${type.charAt(0).toUpperCase() + type.slice(1)} data saved successfully.`);
+            clearForm(type);
+        }
+
+        function clearData(type) {
+            data[type] = [];
+            saveDataToStorage(type, data);
+            alert(`${type.charAt(0).toUpperCase() + type.slice(1)} data cleared.`);
+            document.getElementById(`${type}Result`).innerHTML = '';
+            document.getElementById(`${type}Summary`).innerHTML = '';
+        }
+
+        function clearForm(type) {
+            document.getElementById(`${type}Form`).reset();
+        }
+
+        function filterData(type) {
+            let startDate = document.getElementById(`${type}StartDate`).value;
+            let endDate = document.getElementById(`${type}EndDate`).value;
+            let searchItem = document.getElementById(`${type}SearchItem`).value.trim();
+
+            let filteredData = data[type].filter(item => {
+                let itemDate = new Date(item.date);
+                let start = new Date(startDate);
+                let end = new Date(endDate);
+                return (!startDate || itemDate >= start) &&
+                       (!endDate || itemDate <= end) &&
+                       (!searchItem || item.itemName.toLowerCase().includes(searchItem.toLowerCase()));
+            });
+
+            let html = '<h2>Filtered Data</h2>';
+            filteredData.forEach(item => {
+                html += `<div class="transaction">
+                            <h3>Item: ${item.itemName}</h3>
+                            <p>Quantity: ${item.quantity}</p>
+                            <p>Date: ${item.date}</p>
+                            ${type === 'transferIn' ? `<p>Where From: ${item.whereFromOrTo}</p>` : type === 'transferOut' ? `<p>Where To: ${item.whereFromOrTo}</p>` : ''}
+                        </div>`;
+            });
+
+            document.getElementById(`${type}Result`).innerHTML = html;
+            document.getElementById(`${type}Summary`).innerHTML = `<h3>Total Records: ${filteredData.length}</h3>`;
+        }
+
+        function generateMasterReport() {
+            const startDate = document.getElementById('masterStartDate').value;
+            const endDate = document.getElementById('masterEndDate').value;
+            const searchItem = document.getElementById('masterSearchItem').value.trim();
+
+            // Filter data by date range and search item
+            let receivingData = filterDataByType('receiving', startDate, endDate, searchItem);
+            let transferInData = filterDataByType('transferIn', startDate, endDate, searchItem);
+            let transferOutData = filterDataByType('transferOut', startDate, endDate, searchItem);
+
+            // Combine receiving and transfer-in data
+            let combinedData = [...receivingData, ...transferInData];
+
+            // Initialize final quantities object
+            let finalQuantities = {};
+
+            // Sum up quantities from receiving and transfer-in data
+            combinedData.forEach(item => {
+                if (!finalQuantities[item.itemName]) {
+                    finalQuantities[item.itemName] = 0;
+                }
+                finalQuantities[item.itemName] += item.quantity;
+            });
+
+            // Subtract quantities from transfer-out data
+            transferOutData.forEach(item => {
+                if (!finalQuantities[item.itemName]) {
+                    finalQuantities[item.itemName] = 0;
+                }
+                finalQuantities[item.itemName] -= item.quantity;
+            });
+
+            // Prepare HTML output
+            let html = '<h2>Master Report</h2>';
+            for (const [itemName, quantity] of Object.entries(finalQuantities)) {
+                html += `<div class="transaction">
+                            <h3>Item: ${itemName}</h3>
+                            <p>Final Quantity: ${quantity}</p>
+                        </div>`;
+            }
+
+            // Display the report and summary
+            document.getElementById('masterResult').innerHTML = html;
+            document.getElementById('masterSummary').innerHTML = `<h3>Total Items: ${Object.keys(finalQuantities).length}</h3>`;
+        }
+
+        function filterDataByType(type, startDate, endDate, searchItem) {
+            return data[type].filter(item => {
+                let itemDate = new Date(item.date);
+                let start = new Date(startDate);
+                let end = new Date(endDate);
+                return (!startDate || itemDate >= start) &&
+                       (!endDate || itemDate <= end) &&
+                       (!searchItem || item.itemName.toLowerCase().includes(searchItem.toLowerCase()));
+            });
+        }
+
+        function exportToExcel(type) {
+            let dataToExport = data[type];
+            if (dataToExport.length === 0) {
+                alert('No data to export.');
+                return;
+            }
+
+            let csvContent = "data:text/csv;charset=utf-8,";
+            csvContent += "Item Name,Quantity,Date,Where From/To\n";
+            dataToExport.forEach(item => {
+                csvContent += `${item.itemName},${item.quantity},${item.date},${item.whereFromOrTo}\n`;
+            });
+
+            let encodedUri = encodeURI(csvContent);
+            let link = document.createElement("a");
+            link.setAttribute("href", encodedUri);
+            link.setAttribute("download", `${type}_data.csv`);
+            document.body.appendChild(link);
+            link.click();
+        }
+
+        // Initial call to load data
+        data = loadData();
+    </script>
+</body>
+</html>
