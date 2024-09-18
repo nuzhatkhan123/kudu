@@ -45,6 +45,17 @@
         h1 {
             text-align: center; /* Center align the title */
         }
+        .footer {
+            text-align: center; /* Center align the footer */
+            margin-top: 20px;
+        }
+        .footer a {
+            color: #4CAF50; /* Green link color */
+            text-decoration: none; /* Remove underline from link */
+        }
+        .footer a:hover {
+            text-decoration: underline; /* Underline on hover */
+        }
     </style>
 </head>
 <body>
@@ -74,6 +85,10 @@
 </table>
 
 <button onclick="calculateOrders()">Calculate All Orders</button>
+
+<div class="footer">
+    <p>Made by <a href="https://nuzhatkhan123.github.io/kudu/about.html" target="_blank" rel="noopener noreferrer">GHostKmr.</a></p>
+</div>
 
 <script>
     const items = [
