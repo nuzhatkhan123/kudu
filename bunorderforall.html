@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bun Ordering Calculator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            background-color: black; /* Black background */
+            color: white; /* White text for visibility */
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+        table, th, td {
+            border: 1px solid white; /* White borders */
+        }
+        th, td {
+            padding: 8px;
+            text-align: center;
+        }
+        input, select {
+            padding: 5px;
+            width: 100%;
+            box-sizing: border-box;
+            background-color: #333; /* Dark background for inputs */
+            color: white; /* White text for inputs */
+            border: 1px solid #555; /* Gray border for inputs */
+        }
+        .calculator button {
+            padding: 10px;
+            background-color: #4CAF50; /* Green button */
+            color: white;
+            border: none;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+        .calculator button:hover {
+            background-color: #45a049; /* Darker green on hover */
+        }
+        h1 {
+            text-align: center; /* Center align the title */
+        }
+    </style>
+</head>
+<body>
+
+<h1>Bun Ordering Calculator</h1>
+
+<table>
+    <thead>
+        <tr>
+            <th>Item Code</th>
+            <th>Item Name</th>
+            <th>Average Daily Consumption</th>
+            <th>On Hand</th>
+            <th>Receiving Today</th>
+            <th>Advance Order</th>
+            <th>Transfer Out</th>
+            <th>Transfer In</th>
+            <th>Buffer</th>
+            <th>Total On Hand</th>
+            <th>To Order (Pieces)</th>
+            <th>To Order (Packets)</th> <!-- New Column for packets -->
+        </tr>
+    </thead>
+    <tbody id="itemsTable">
+        <!-- Table rows will be generated dynamically -->
+    </tbody>
+</table>
+
+<button onclick="calculateOrders()">Calculate All Orders</button>
+
+<script>
+    const items = [
+        { code: '110021', name: 'Steak Bread Normal', avg: 160, piecesPerPacket: 4 },
+        { code: '110022', name: 'Steak Bread Brown', avg: 20, piecesPerPacket: 4 },
+        { code: '110023', name: 'Big Bun', avg: 42, piecesPerPacket: 6 },
+        { code: '110024', name: 'Small Bun', avg: 30, piecesPerPacket: 6 },
+        { code: '110027', name: 'Kiddie Bread', avg: 60, piecesPerPacket: 4 },
+        { code: '110028', name: 'Cruton Bread', avg: 30, piecesPerPacket: 15 },
+        { code: '110087', name: 'Kudu Small Bun', avg: 6, piecesPerPacket: 1 },
+        { code: '110088', name: 'Riyadh White Bread', avg: 216, piecesPerPacket: 18 },
+        { code: '110133', name: 'Kudu Potato Bun', avg: 48, piecesPerPacket: 6 },
+        { code: '110141', name: 'Multicereal', avg: 144, piecesPerPacket: 18 },
+        { code: '110146', name: 'Potato Steak Bread', avg: 20, piecesPerPacket: 4 }
+    ];
+
+    const tableBody = document.getElementById('itemsTable');
+
+    // Populate table rows dynamically
+    items.forEach((item, index) => {
+        const row = document.createElement('tr');
+        row.innerHTML = `
+            <td>${item.code}</td>
+            <td>${item.name}</td>
+            <td><input type="number" id="avg${index}" value="${loadValue(`avg${index}`) || item.avg}" step="any" placeholder="Average Daily Consumption" onchange="saveValue('avg${index}', this.value)"></td>
+            <td><input type="number" id="onHand${index}" placeholder="On Hand"></td>
+            <td><input type="number" id="receivingToday${index}" placeholder="Receiving"></td>
+            <td><input type="number" id="advanceOrder${index}" placeholder="Advance Order"></td>
+            <td><input type="number" id="transferOut${index}" placeholder="Transfer Out"></td>
+            <td><input type="number" id="transferIn${index}" placeholder="Transfer In"></td>
+            <td>
+                <select id="buffer${index}">
+                    <option value="0">0%</option>
+                    <option value="0.25">25%</option>
+                    <option value="0.50">50%</option>
+                    <option value="0.75">75%</option>
+                    <option value="1">100%</option>
+                </select>
+            </td>
+            <td id="totalOnHand${index}">0</td>
+            <td id="toOrder${index}">0</td>
+            <td id="toOrderPackets${index}">0</td> <!-- New field for packet calculation -->
+        `;
+        tableBody.appendChild(row);
+    });
+
+    function saveValue(key, value) {
+        localStorage.setItem(key, value);
+    }
+
+    function loadValue(key) {
+        return localStorage.getItem(key);
+    }
+
+    function calculateOrders() {
+        items.forEach((item, index) => {
+            const avgDailyConsumption = parseFloat(document.getElementById(`avg${index}`).value) || item.avg;
+            const onHand = parseFloat(document.getElementById(`onHand${index}`).value) || 0;
+            const receivingToday = parseFloat(document.getElementById(`receivingToday${index}`).value) || 0;
+            const advanceOrder = parseFloat(document.getElementById(`advanceOrder${index}`).value) || 0;
+            const transferOut = parseFloat(document.getElementById(`transferOut${index}`).value) || 0;
+            const transferIn = parseFloat(document.getElementById(`transferIn${index}`).value) || 0;
+            const bufferMultiplier = parseFloat(document.getElementById(`buffer${index}`).value);
+
+            // Step 1: Calculate total on hand
+            const totalOnHand = onHand + receivingToday + transferIn - transferOut;
+            document.getElementById(`totalOnHand${index}`).innerText = totalOnHand.toFixed(2);
+
+            // Step 2: Adjust for twice the daily consumption
+            const adjustedOnHand = totalOnHand - (2 * avgDailyConsumption);
+
+            // Step 3: Subtract the advance order from the adjusted on-hand quantity
+            const finalOnHand = adjustedOnHand - advanceOrder;
+
+            // Step 4: Calculate to order using the buffer
+            const buffer = avgDailyConsumption * bufferMultiplier;
+            const toOrder = Math.max(0, buffer - finalOnHand);
+            document.getElementById(`toOrder${index}`).innerText = toOrder.toFixed(2);
+
+            // Step 5: Calculate the number of packets
+            const toOrderPackets = Math.ceil(toOrder / item.piecesPerPacket);
+            document.getElementById(`toOrderPackets${index}`).innerText = toOrderPackets;
+        });
+    }
+</script>
+
+</body>
+</html>
